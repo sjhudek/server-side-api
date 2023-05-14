@@ -40,6 +40,9 @@ $(document).ready(function () {
 
     // If the row has an id, extract the hour part of the id
     if (rowIdString) {
+      // extracts the hour value from rowIdStrings and stores it as an integer in the rowHour variable
+      // The split() method is called on rowIdString using the hyphen character ("-") as the separator
+      // This splits the string into an array of substrings, with each substring separated by the hyphen.
       rowHour = parseInt(rowIdString.split("-")[1]);
     }
 
@@ -47,6 +50,7 @@ $(document).ready(function () {
     if (rowHour !== null) {
       row.classList.remove("past", "present", "future");
 
+      // adds a CSS class to an HTML element, based on the comparison between two integer values currentHour and rowHour
       if (currentHour === rowHour) {
         row.classList.add("present");
       } else if (currentHour < rowHour) {
@@ -60,14 +64,45 @@ $(document).ready(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  $("textarea").each(function () {
-    // Get the id of the textarea element
-    var id = $(this).attr("id");
-    // Get the user input from localStorage using the id as the key
-    var userInput = localStorage.getItem(id);
-    // Set the value of the textarea element to the user input
-    $(this).val(userInput);
+
+  // Get all textarea elements
+// const textareas = document.querySelectorAll("textarea");
+
+// // Loop through each textarea
+// textareas.forEach(function (textarea) {
+//   // Add keyup event listener to each textarea
+//   textarea.addEventListener("keyup", function () {
+//     // Get the id of the containing time-block
+//     const timeBlockId = textarea.parentNode.getAttribute("id");
+//     // Get the user input from the corresponding textarea
+//     const userInput = textarea.value;
+//     // Save the user input to local storage using the time-block id as a key
+//     localStorage.setItem(timeBlockId, userInput);
+//   });
+// });
+
+// Add an event listener to all save buttons
+document.querySelectorAll(".saveBtn").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    // Get the corresponding textarea and its value
+    var textarea = btn.parentElement.querySelector(".description");
+    var value = textarea.value.trim();
+
+    // Get the corresponding hour and use it as the key in the localStorage
+    var hour = textarea.parentElement.id;
+    localStorage.setItem(hour, value);
   });
+});
+
+// Load saved values from localStorage
+for (var i = 9; i <= 16; i++) {
+  var hour = "hour-" + i;
+  var value = localStorage.getItem(hour);
+  var textarea = document.querySelector("#" + hour + " .description");
+  if (textarea && value !== null) {
+    textarea.value = value;
+  }
+}
 
 
   // TODO: Add code to display the current date in the header of the page.
