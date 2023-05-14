@@ -14,9 +14,11 @@ When using the daily planner to create a schedule:
 * Saved events persist even after refreshing the page, as they're stored in local storage.
 
 ## Planner Website:
-
+https://sjhudek.github.io/server-side-api/
 
 ## Website image:
+![Screenshot 2023-05-13 at 21 26 36](https://github.com/sjhudek/server-side-api/assets/16738959/3528b78f-ca57-4f0a-9861-6624ed8702ec)
+
 
 ## Source Code & Inspiration:
 * https://www.chegg.com/homework-help/questions-and-answers/create-simple-calendar-application-allows-user-save-events-hour-day-modifying-starter-code-q108512683
